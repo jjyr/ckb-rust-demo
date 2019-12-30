@@ -1,1 +1,0 @@
-{"rustc":3699816146273518239,"features":"[]","target":1149909883322654679,"profile":14996655781355331481,"path":1036222786711178230,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"riscv64imac-unknown-none-elf/debug/.fingerprint/contract-57e4f791d847027d/dep-bin-contract-57e4f791d847027d"}}],"rustflags":["-C","link-arg=-Tlinker.ld"],"metadata":3154294098504434027}
