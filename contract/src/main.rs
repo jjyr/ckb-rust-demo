@@ -12,8 +12,6 @@ use alloc::vec;
 
 extern crate alloc;
 
-#[link_section = ".heap.mem"]
-#[no_mangle]
 pub static mut HEAP_VECTOR:[u8;REQUIRED_SPACE] = [0u8;REQUIRED_SPACE];
 
 #[global_allocator]
@@ -26,13 +24,16 @@ fn oom_handler(_: alloc::alloc::Layout) -> ! {
 }
 
 #[no_mangle]
-#[start]
-pub fn start(_argc: isize, _argv: *const *const u8) -> isize {
+pub extern "C" fn main() -> i8 {
     let v = vec![0u8;42];
     debug!("{:?}", v);
-    exit(0);
-    // just ignore this return value
     0
+}
+
+#[no_mangle]
+pub extern "C" fn _start() -> ! {
+    exit(main());
+    loop{}
 }
 
 #[panic_handler]
