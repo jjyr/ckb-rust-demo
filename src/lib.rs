@@ -4,10 +4,9 @@ mod tests {
     use std::fs::File;
     use std::io::Read;
 
-    #[test]
-    fn it_works() {
+    #[test] fn it_works() {
         let mut code = Vec::new();
-        File::open("contract/target/riscv64imac-unknown-none-elf/debug/contract")
+        File::open("contract/target/riscv64imac-unknown-none-elf/release/contract")
             .unwrap()
             .read_to_end(&mut code)
             .expect("read code");
@@ -19,7 +18,8 @@ mod tests {
             .inject_and_build(&mut context)
             .expect("build tx");
         println!("{:#x}", tx.hash());
-        let verify_result = context.verify_tx(&tx, 50000000u64);
-        verify_result.expect("pass test");
+        let verify_result = context.verify_tx(&tx, 500000000u64);
+        let cycles = verify_result.expect("pass test");
+        println!("consume cycles {}", cycles);
     }
 }
